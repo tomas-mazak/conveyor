@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: logconveyor-example
+  namespace: default
+  labels:
+    app: logconveyor-example
+spec:
+  containers:
+  - name: main
+    image: wigwam/logtest
+    volumeMounts:
+    - name: logs
+      mountPath: /tmp/logs
+  - name: conveyor
+    image: wigwam/conveyor
+    volumeMounts:
+    - name: logs
+      mountPath: /tmp/logs
+  volumes:
+  - name: logs
+    emptyDir: {}

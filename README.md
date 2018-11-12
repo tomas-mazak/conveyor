@@ -53,3 +53,7 @@ For every watched file:
       - if it was MODIFY, file was (hopefully) appended, continue reading
       - if it was DELETE_SELF or MOVED_SELF, file was (hopefully) rotated, close the file and
         stop watching
+
+### Example
+
+For a working example, see [example/](example/).
