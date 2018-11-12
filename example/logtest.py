@@ -8,9 +8,9 @@ import signal
 import multiprocessing
 
 LOGS = [
-    ('access.log', 'Access', 0.5, 10),
-    ('error.log', 'Nasty error occured', 2, 30),
-    ('random.log', 'Some randomness', 1, 15),
+    ('access.log', 'Access', 0.5, 10, 0),
+    ('error.log', 'Nasty error occured', 2, 30, 0),
+    ('random.log', 'Some randomness', 1, 15, 10),
 ]
 
 
@@ -18,8 +18,9 @@ def log(args):
     """
     Write and rotate a single log file
     """
-    filename, msg, log_period, rotation_period = args
+    filename, msg, log_period, rotation_period, initial_delay = args
     filename = os.path.join(os.environ.get('LOG_DIRECTORY', '/tmp/logs'), filename)
+    time.sleep(initial_delay)
     while True:
         # Write
         with open(filename, "a") as f:
