@@ -25,7 +25,12 @@ func main() {
 	// TODO: do the logger handling nicer
 	logger := conveyor.Logger{Ch: make(chan string, OutputBufferSize)}
 
-	go conveyor.WatchDirectory("/tmp/logs", ".log", logger)
+	logDir := os.Getenv("LOG_DIRECTORY")
+	if logDir == "" {
+		logDir = "/tmp/logs"
+	}
+
+	go conveyor.WatchDirectory(logDir, ".log", logger)
 
 	for {
 		select {
